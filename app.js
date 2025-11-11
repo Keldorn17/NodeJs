@@ -5,10 +5,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const { engine } = require("express-handlebars");
+const ensureAdminExists = require("./seeder/adminSeeder");
+require("dotenv").config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const authRoutes = require("./routes/auth");
+const dbListRoutes = require("./routes/dbList");
 
 var app = express();
 
@@ -35,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(
     session({
-        secret: "secret123",
+        secret: process.env.SESSION_SECRET || "secret",
         resave: false,
         saveUninitialized: false,
     })
@@ -46,11 +49,13 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use("/", indexRouter);
 app.use("/", authRoutes);
+app.use("/", dbListRoutes);
 
-app.get("/", (req, res) => {
-    res.render("index");
-});
+(async () => {
+    await ensureAdminExists();
+})();
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
