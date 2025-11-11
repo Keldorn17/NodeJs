@@ -1,6 +1,9 @@
 ### idea ###
 .idea
 
+### tailwind css ###
+/public/css/style.css
+
 ### Git ###
 *.orig
 
