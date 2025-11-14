@@ -4,7 +4,9 @@
 
             <div class="flex items-center gap-6">
                 <a href="/" class="text-gray-100 font-semibold hover:text-white">Védett fajok</a>
-                <a href="/list" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md">Adatbázis</a>
+                {{#if user}}
+                    <a href="/animals" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md">Adatbázis</a>
+                {{/if}}
             </div>
 
             <div class="flex items-center gap-6">
@@ -15,22 +17,22 @@
                     </span>
 
                     {{#if (eq user.role "admin")}}
-                        <a href="/crud/admin"
+                        <a href="/admin"
                            class="text-indigo-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md">
                             Admin
                         </a>
                     {{/if}}
 
-                    <a href="/logout" class="text-red-400 hover:text-white hover:bg-red-500/20 px-3 py-2 rounded-md">
+                    <a href="/auth/logout" class="text-red-400 hover:text-white hover:bg-red-500/20 px-3 py-2 rounded-md">
                         Kijelentkezés
                     </a>
 
                 {{else}}
-                    <a href="/login" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md">
+                    <a href="/auth/login" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md">
                         Bejelentkezés
                     </a>
 
-                    <a href="/register" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md">
+                    <a href="/auth/register" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md">
                         Regisztráció
                     </a>
                 {{/if}}

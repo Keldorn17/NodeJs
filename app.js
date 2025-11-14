@@ -6,12 +6,13 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const { engine } = require("express-handlebars");
 const ensureAdminExists = require("./seeder/adminSeeder");
+const { requireAdmin, requireAuth } = require("./middleware/auth");
 require("dotenv").config();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
 const authRoutes = require("./routes/auth");
-const dbListRoutes = require("./routes/dbList");
+const adminRoutes = require("./routes/admin");
+const animalsRoutes = require("./routes/animals");
 
 var app = express();
 
@@ -50,8 +51,9 @@ app.use((req, res, next) => {
 });
 
 app.use("/", indexRouter);
-app.use("/", authRoutes);
-app.use("/", dbListRoutes);
+app.use("/auth", authRoutes);
+app.use("/animals", requireAuth, animalsRoutes);
+app.use("/admin", requireAdmin, adminRoutes);
 
 (async () => {
     await ensureAdminExists();
