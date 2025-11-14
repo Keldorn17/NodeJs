@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require("bcrypt");
-const db = require("../config/db");
+const authService = require("../service/authService");
 
 router.get("/register", (req, res) => {
     res.render("register", { errors: {}, form: {}, title: "Regisztráció" });
@@ -10,69 +9,39 @@ router.get("/register", (req, res) => {
 router.post("/register", async (req, res) => {
     const { username, password, password2 } = req.body;
 
-    const errors = {
-        username: null,
-        password: null,
-        password2: null,
-        global: null
-    };
+    try {
+        const { user, errors, formValues } = await authService.registerUser(username, password, password2);
 
-    if (password !== password2) {
-        errors.password2 = "A jelszavak nem egyeznek!";
+        if (errors) {
+            return res.render("register", {
+                error: errors.username || errors.password2,
+                form: formValues
+            });
+        }
+
+        req.session.user = user;
+        req.session.isLoggedIn = true;
+        res.redirect("/");
+    } catch (err) {
+        console.error("Registration error:", err);
+        res.render("register", {
+            error: "Hiba történt a regisztráció során. Kérjük, próbáld újra később.",
+            form: { username }
+        });
     }
-
-    if (
-        !(password.length >= 8 &&
-            /[a-z]/.test(password) &&
-            /[A-Z]/.test(password) &&
-            /\d/.test(password))
-    ) {
-        errors.password = "A jelszónak legalább 8 karakterből kell állnia, és tartalmaznia kell kisbetűt, nagybetűt és számot.";
-    }
-
-    const [exists] = await db.query("SELECT id FROM users WHERE username = ?", [username]);
-    if (exists.length > 0) {
-        errors.username = "Ez a felhasználónév már foglalt!";
-    }
-
-    if (errors.username || errors.password || errors.password2) {
-        return res.render("register", { errors, form: { username }, title: "Regisztráció" });
-    }
-
-    const hash = await bcrypt.hash(password, 10);
-    await db.query("INSERT INTO users (username, password) VALUES (?, ?)", [username, hash]);
-
-    res.redirect("/login");
 });
-
 
 router.get("/login", (req, res) => {
     const logout = req.query.logout === "true";
-    res.render("login", { error: null, form: {}, title: "Login", logout: logout });
+    res.render("login", { error: null, form: {}, title: "Login", logout });
 });
 
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
+    const { user, error } = await authService.loginUser(username, password);
 
-    const [rows] = await db.query("SELECT * FROM users WHERE username = ?", [username]);
-
-    if (rows.length === 0) {
-        return res.render("login", {
-            title: "Bejelentkezés",
-            error: "Hibás felhasználónév vagy jelszó.",
-            form: { username }
-        });
-    }
-
-    const user = rows[0];
-    const ok = await bcrypt.compare(password, user.password);
-
-    if (!ok) {
-        return res.render("login", {
-            title: "Bejelentkezés",
-            error: "Hibás felhasználónév vagy jelszó.",
-            form: { username }
-        });
+    if (error) {
+        return res.render("login", { title: "Bejelentkezés", error, form: { username } });
     }
 
     req.session.user = { id: user.id, username: user.username, role: user.role };
@@ -82,7 +51,7 @@ router.post("/login", async (req, res) => {
 router.get("/logout", (req, res) => {
     req.session.destroy(() => {
         res.clearCookie("connect.sid");
-        res.redirect("/login?logout=true");
+        res.redirect("/auth/login?logout=true");
     });
 });
 
