@@ -1,2 +1,178 @@
-<h1 class="text-3xl font-bold">Üdvözöljük a Védett Fajok adatbázis oldalán!</h1>
-<p class="mt-4">Bemutatjuk a Magyarországon fokozottan védett állatokat.</p>
+<div class="relative bg-gray-900 mb-12 overflow-hidden">
+    <div class="absolute inset-0">
+        <img class="w-full h-full object-cover opacity-40" src="/images/hero.jpg" alt="Magyar Tájkép">
+    </div>
+    <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Védjük meg <span class="text-emerald-400">Magyarország</span> természeti kincseit
+        </h1>
+        <p class="mt-6 text-xl text-gray-300 max-w-3xl mx-auto">
+            Adatbázisunk célja, hogy felhívja a figyelmet a Kárpát-medence veszélyeztetett és fokozottan védett
+            állatfajaira. Ismerd meg őket, mielőtt eltűnnek.
+        </p>
+        <div class="mt-10 flex justify-center gap-4">
+            {{#if user}}
+                <a href="/animals"
+                   class="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-3 rounded-lg font-bold text-lg transition shadow-lg shadow-emerald-900/50">
+                    Böngészés az adatbázisban
+                </a>
+            {{else}}
+                <a href="/auth/register"
+                   class="bg-white text-gray-900 hover:bg-gray-100 px-8 py-3 rounded-lg font-bold text-lg transition">
+                    Csatlakozz hozzánk
+                </a>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 mx-5">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 text-center">
+        <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Hiteles Információk</h3>
+        <p class="text-gray-500 dark:text-gray-400">Hivatalos forrásokból származó adatok a hazai populációkról és
+            élőhelyekről.</p>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 text-center">
+        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Élőhely Védelem</h3>
+        <p class="text-gray-500 dark:text-gray-400">Térképes áttekintés és leírások arról, hol élnek ezek a különleges
+            állatok.</p>
+    </div>
+
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 text-center">
+        <div class="w-12 h-12 bg-amber-100 dark:bg-amber-900/30 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+            </svg>
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Veszélyeztetettség</h3>
+        <p class="text-gray-500 dark:text-gray-400">Naprakész státuszjelentés a fajok veszélyeztetettségi
+            fokozatáról.</p>
+    </div>
+</div>
+
+<div class="mb-12 mx-5">
+    <div class="flex justify-between items-end mb-6">
+        <div>
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Kiemelt fajok</h2>
+            <p class="text-gray-500 dark:text-gray-400 mt-1">Néhány ikonikus állat, amely védelemre szorul.</p>
+        </div>
+        <a href="/animals" class="text-emerald-600 dark:text-emerald-400 hover:underline text-sm font-medium">Összes
+            megtekintése &rarr;</a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+
+        <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-100 dark:border-gray-700">
+            <div class="overflow-hidden relative">
+                <img src="/images/tuzok.png" alt="Túzok"
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Fokozottan
+                    Védett
+                </div>
+            </div>
+            <div class="p-5">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Túzok (Otis tarda)</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                    A túzok Európa egyik legnagyobb testű röpképes madara. A magyar puszta emblematikus madara.
+                </p>
+                <div class="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700 pt-3">
+                    <span>Eszmei érték:</span>
+                    <span class="font-semibold text-gray-900 dark:text-white">1 000 000 Ft</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-100 dark:border-gray-700">
+            <div class="overflow-hidden relative">
+                <img src="/images/mocsari.png" alt="Mocsári teknős"
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute top-2 right-2 bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded">Védett
+                </div>
+            </div>
+            <div class="p-5">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Mocsári teknős</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                    Közép-Európa egyetlen őshonos teknősfaja. Vizes élőhelyek csökkenése veszélyezteti.
+                </p>
+                <div class="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700 pt-3">
+                    <span>Eszmei érték:</span>
+                    <span class="font-semibold text-gray-900 dark:text-white">50 000 Ft</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-100 dark:border-gray-700">
+            <div class="overflow-hidden relative">
+                <img src="/images/vadmacska.png" alt="Vadmacska"
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Fokozottan
+                    Védett
+                </div>
+            </div>
+            <div class="p-5">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Vadmacska</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                    A háborítatlan erdők lakója. A házimacskával való hibridizáció jelenti rá a legnagyobb veszélyt.
+                </p>
+                <div class="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700 pt-3">
+                    <span>Eszmei érték:</span>
+                    <span class="font-semibold text-gray-900 dark:text-white">250 000 Ft</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="relative w-full rounded-2xl shadow-2xl overflow-hidden group border border-gray-200 dark:border-gray-700">
+
+        <div class="absolute inset-0">
+            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                 src="/images/taj.jpg"
+                 alt="Tájkép">
+
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/60 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 px-8 py-12 md:px-12 md:py-16 max-w-2xl">
+
+            <div class="uppercase tracking-wider text-sm text-emerald-400 font-bold mb-3">
+                Lépj kapcsolatba velünk
+            </div>
+
+            <h2 class="text-3xl md:text-4xl font-bold text-white leading-tight mb-6">
+                Kérdésed van, vagy csatlakoznál a csapathoz?
+            </h2>
+
+            <p class="text-lg text-gray-200 mb-8 leading-relaxed">
+                Örömmel fogadjuk észrevételeidet. Ha láttál egy ritka fajt, vagy csak támogatni szeretnéd a munkánkat,
+                ne habozz üzenetet hagyni nekünk.
+            </p>
+
+            <a href="/contact"
+               class="inline-flex items-center justify-center px-8 py-4 text-base font-bold rounded-lg text-white bg-emerald-600 hover:bg-emerald-500 transition transform hover:-translate-y-1 shadow-lg shadow-emerald-900/50">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+                Üzenet írása
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
