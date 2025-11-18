@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="hu">
 {{>header}}
-
-<body class="bg-gray-900 text-gray-100">
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300 flex flex-col min-h-screen">
 
 {{>navbar}}
 
-<div class="container mx-auto p-6">
+<main class="flex-grow">
     {{{body}}}
-</div>
+</main>
+
+{{>footer}}
 
 </body>
 </html>

@@ -1,44 +1,43 @@
-<nav class="relative bg-gray-800/50 backdrop-blur-sm after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<nav class="sticky top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 transition-colors duration-300">
+    <div class="mx-auto px-3">
         <div class="flex h-16 items-center justify-between">
 
             <div class="flex items-center gap-6">
-                <a href="/" class="text-gray-100 font-semibold hover:text-white">Védett fajok</a>
+                <a href="/" class="text-emerald-600 dark:text-emerald-400 font-bold text-xl flex items-center gap-2">
+                    <span>🌿</span> Védett fajok
+                </a>
                 {{#if user}}
-                    <a href="/animals" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md">Adatbázis</a>
+                    <a href="/animals" class="text-gray-600 dark:text-gray-300 hover:text-emerald-600 dark:hover:text-white px-3 py-2 rounded-md font-medium transition">Adatbázis</a>
                 {{/if}}
             </div>
 
-            <div class="flex items-center gap-6">
-
+            <div class="flex items-center gap-4">
                 {{#if user}}
-                    <span class="text-gray-300">
-                      Bejelentkezve: <strong class="text-white">{{user.username}}</strong>
-                    </span>
+                    <div class="hidden md:flex flex-col items-end leading-tight mr-2">
+                        <span class="text-xs text-gray-500 dark:text-gray-400">Bejelentkezve</span>
+                        <strong class="text-gray-800 dark:text-white">{{user.username}}</strong>
+                    </div>
 
                     {{#if (eq user.role "admin")}}
-                        <a href="/admin"
-                           class="text-indigo-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md">
+                        <a href="/admin" class="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 px-3 py-2 rounded-md font-medium transition">
                             Admin
                         </a>
                     {{/if}}
 
-                    <a href="/auth/logout" class="text-red-400 hover:text-white hover:bg-red-500/20 px-3 py-2 rounded-md">
+                    <a href="/auth/logout" class="text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/20 px-3 py-2 rounded-md font-medium transition">
                         Kijelentkezés
                     </a>
 
                 {{else}}
-                    <a href="/auth/login" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md">
+                    <a href="/auth/login" class="text-gray-700 dark:text-gray-200 hover:text-emerald-600 dark:hover:text-emerald-400 font-medium transition">
                         Bejelentkezés
                     </a>
-
-                    <a href="/auth/register" class="text-gray-300 hover:text-white hover:bg-white/5 px-3 py-2 rounded-md">
+                    <a href="/auth/register" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md font-medium transition shadow-lg shadow-emerald-600/20">
                         Regisztráció
                     </a>
                 {{/if}}
 
             </div>
-
         </div>
     </div>
 </nav>
