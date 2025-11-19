@@ -31,7 +31,6 @@ router.post('/submit', async function (req, res, next) {
             user: req.session.user
         });
     } catch (err) {
-        console.error(err);
         return res.render('contact', {
             title: 'Kapcsolat',
             error: 'Nehézségek akadtak a mentéssel. Kérjük próbálja újra később.',

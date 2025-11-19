@@ -3,13 +3,13 @@
         <div class="flex h-16 items-center justify-between">
 
             <div class="flex items-center gap-6">
-                <a href="/" class="text-emerald-600 dark:text-emerald-400 font-bold text-xl flex items-center gap-2">
+                <a href="{{basePath}}/" class="text-emerald-600 dark:text-emerald-400 font-bold text-xl flex items-center gap-2">
                     <span>🌿</span> Védett fajok
                 </a>
 
                 {{#if user}}
                     <div class="hidden md:flex gap-6">
-                        <a href="/animals"
+                        <a href="{{basePath}}/animals"
                            class="px-1 py-2 border-b-2 font-medium transition-colors duration-200
                            {{#if (eq activePage 'animals')}}
                                border-emerald-600 text-emerald-600 dark:border-emerald-400 dark:text-emerald-400
@@ -19,7 +19,7 @@
                             Adatbázis
                         </a>
                     {{#if (eq user.role 'admin')}}
-                        <a href="/admin"
+                        <a href="{{basePath}}/admin"
                            class="px-1 py-2 border-b-2 font-medium transition-colors duration-200
                            {{#if (eq activePage 'admin')}}
                                border-emerald-600 text-emerald-600 dark:border-emerald-400 dark:text-emerald-400
@@ -29,7 +29,7 @@
                             Kategóriák
                         </a>
 
-                        <a href="/contact-list"
+                        <a href="{{basePath}}/contact-list"
                            class="px-1 py-2 border-b-2 font-medium transition-colors duration-200
                            {{#if (eq activePage 'contact')}}
                                border-emerald-600 text-emerald-600 dark:border-emerald-400 dark:text-emerald-400
@@ -51,15 +51,15 @@
                         <strong class="text-gray-800 dark:text-white">{{user.username}}</strong>
                     </div>
 
-                    <a href="/auth/logout" class="hidden md:inline-flex text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/20 px-3 py-2 rounded-md font-medium transition text-sm">
+                    <a href="{{basePath}}/auth/logout" class="hidden md:inline-flex text-red-600 dark:text-red-400 border border-red-200 dark:border-red-900 hover:bg-red-50 dark:hover:bg-red-900/20 px-3 py-2 rounded-md font-medium transition text-sm">
                         Kijelentkezés
                     </a>
                 {{else}}
                     <div class="hidden md:flex gap-4">
-                        <a href="/auth/login" class="text-gray-700 dark:text-gray-200 hover:text-emerald-600 px-4 py-2 dark:hover:text-emerald-400 font-medium transition">
+                        <a href="{{basePath}}/auth/login" class="text-gray-700 dark:text-gray-200 hover:text-emerald-600 px-4 py-2 dark:hover:text-emerald-400 font-medium transition">
                             Bejelentkezés
                         </a>
-                        <a href="/auth/register" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md font-medium transition shadow-lg shadow-emerald-600/20">
+                        <a href="{{basePath}}/auth/register" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md font-medium transition shadow-lg shadow-emerald-600/20">
                             Regisztráció
                         </a>
                     </div>
@@ -87,7 +87,7 @@
                     <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Bejelentkezve</div>
                 </div>
 
-                <a href="/animals"
+                <a href="{{basePath}}/animals"
                    class="block px-3 py-2 rounded-md text-base font-medium
                    {{#if (eq activePage 'animals')}}
                        bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400
@@ -97,7 +97,7 @@
                     Adatbázis
                 </a>
 
-                <a href="/admin"
+                <a href="{{basePath}}/admin"
                    class="block px-3 py-2 rounded-md text-base font-medium
                    {{#if (eq activePage 'admin')}}
                        bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400
@@ -107,7 +107,7 @@
                     Kategóriák
                 </a>
 
-                <a href="/contact-list"
+                <a href="{{basePath}}/contact-list"
                    class="block px-3 py-2 rounded-md text-base font-medium
                    {{#if (eq activePage 'contact')}}
                        bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400
@@ -117,14 +117,14 @@
                     Üzenetek
                 </a>
 
-                <a href="/auth/logout" class="block mt-4 px-3 py-2 rounded-md text-base font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
+                <a href="{{basePath}}/auth/logout" class="block mt-4 px-3 py-2 rounded-md text-base font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20">
                     Kijelentkezés
                 </a>
             {{else}}
-                <a href="/auth/login" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-emerald-600 hover:bg-gray-50 dark:hover:bg-gray-800">
+                <a href="{{basePath}}/auth/login" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-emerald-600 hover:bg-gray-50 dark:hover:bg-gray-800">
                     Bejelentkezés
                 </a>
-                <a href="/auth/register" class="block px-3 py-2 rounded-md text-base font-medium text-emerald-600 font-bold hover:bg-gray-50 dark:hover:bg-gray-800">
+                <a href="{{basePath}}/auth/register" class="block px-3 py-2 rounded-md text-base font-medium text-emerald-600 font-bold hover:bg-gray-50 dark:hover:bg-gray-800">
                     Regisztráció
                 </a>
             {{/if}}
