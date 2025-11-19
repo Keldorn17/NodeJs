@@ -25,7 +25,7 @@
 
                     <div class="flex gap-3 mt-1">
 
-                        <a href="{{basePath}}/admin/edit/{{id}}"
+                        <a href="{{@root.basePath}}/admin/edit/{{id}}"
                            class="flex-1 inline-flex justify-center items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition
                                   bg-indigo-50 text-indigo-700 hover:bg-indigo-100
                                   dark:bg-indigo-900/30 dark:text-indigo-300 dark:hover:bg-indigo-900/50">
@@ -36,7 +36,7 @@
                             Szerkesztés
                         </a>
 
-                        <form method="GET" action="{{basePath}}/admin/delete/{{id}}"
+                        <form method="GET" action="{{@root.basePath}}/admin/delete/{{id}}"
                               onsubmit="return confirm('Biztosan törölni szeretnéd a(z) &quot;{{nev}}&quot; kategóriát? Ez a művelet nem vonható vissza!');"
                               class="flex-1">
                             <button type="submit"
@@ -77,7 +77,7 @@
                         <td class="px-6 py-4">
                             <div class="flex justify-end items-center gap-3">
 
-                                <a href="{{basePath}}/admin/edit/{{id}}"
+                                <a href="{{@root.basePath}}/admin/edit/{{id}}"
                                    class="inline-flex items-center gap-1 px-3 py-1.5 rounded-md text-sm font-medium transition
                                           bg-indigo-50 text-indigo-700 hover:bg-indigo-100
                                           dark:bg-indigo-900/30 dark:text-indigo-300 dark:hover:bg-indigo-900/50">
@@ -88,7 +88,7 @@
                                     Szerkesztés
                                 </a>
 
-                                <form method="GET" action="/admin/delete/{{id}}"
+                                <form method="GET" action="{{@root.basePath}}/admin/delete/{{id}}"
                                       onsubmit="return confirm('Biztosan törölni szeretnéd a(z) &quot;{{nev}}&quot; kategóriát? Ez a művelet nem vonható vissza!');"
                                       class="inline-block">
                                     <button type="submit"
