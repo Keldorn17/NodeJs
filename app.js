@@ -48,7 +48,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+const basePath = process.env.BASE_PATH ?? "";
+app.use(basePath, express.static(path.join(__dirname, 'public')));
 
 app.use(
     session({
@@ -63,7 +65,7 @@ app.use((req, res, next) => {
     next();
 });
 
-const basePath = process.env.BASE_PATH ?? "";
+
 
 app.use(basePath + "/", indexRouter);
 app.use(basePath + "/auth", authRoutes);
