@@ -26,7 +26,8 @@ router.get("/create", (req, res) => {
 router.post("/create", async (req, res) => {
     try {
         await service.createNewCategory(req.body.nev);
-        res.redirect("/admin");
+        const basePath = req.app.locals.basePath;
+        res.redirect(basePath + "/admin");
     } catch (err) {
         res.render("adminForm", {
             title: "Új kategória",
@@ -57,7 +58,8 @@ router.post("/edit/:id", async (req, res) => {
     try {
         await service.editCategory(req.params.id, req.body.nev);
 
-        res.redirect("/admin");
+        const basePath = req.app.locals.basePath;
+        res.redirect(basePath + "/admin");
     } catch (err) {
         res.render("adminForm", {
             title: "Kategória módosítása",
@@ -73,7 +75,8 @@ router.post("/edit/:id", async (req, res) => {
 
 router.get("/delete/:id", async (req, res) => {
     await service.removeCategory(req.params.id);
-    res.redirect("/admin");
+    const basePath = req.app.locals.basePath;
+    res.redirect(basePath + "/admin");
 });
 
 module.exports = router;
