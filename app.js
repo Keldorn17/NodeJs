@@ -10,6 +10,8 @@ const { requireAdmin, requireAuth } = require("./middleware/auth");
 require("dotenv").config();
 
 const indexRouter = require('./routes/index');
+const contactRouter = require('./routes/contact');
+const contactListRouter = require('./routes/contactList');
 const authRoutes = require("./routes/auth");
 const adminRoutes = require("./routes/admin");
 const animalsRoutes = require("./routes/animals");
@@ -22,7 +24,18 @@ app.engine("hbs", engine({
     extname: ".hbs",
     helpers: {
         eq: (a, b) => a === b,
-        default: (value, fallback) => value ? value : fallback
+        default: (value, fallback) => value ? value : fallback,
+        formatDate: (dateString) => {
+            if (!dateString) return "";
+            const date = new Date(dateString);
+            return new Intl.DateTimeFormat('hu-HU', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            }).format(date);
+        }
     },
     partialsDir: path.join(__dirname, 'views', 'partials'),
     defaultLayout: "main",
@@ -33,7 +46,7 @@ app.set("views", "./views");
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -52,8 +65,10 @@ app.use((req, res, next) => {
 
 app.use("/", indexRouter);
 app.use("/auth", authRoutes);
+app.use("/contact", contactRouter);
 app.use("/animals", requireAuth, animalsRoutes);
 app.use("/admin", requireAdmin, adminRoutes);
+app.use("/contact-list", requireAdmin, contactListRouter);
 
 (async () => {
     await ensureAdminExists();

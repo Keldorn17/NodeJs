@@ -1,0 +1,91 @@
+<div class="container mx-auto px-4 md:px-6 py-10 flex justify-center">
+    <div class="w-full max-w-6xl transition-colors duration-300">
+
+        <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
+            Felhasználói üzenetek
+        </h2>
+
+        <div class="grid grid-cols-1 gap-4 md:hidden">
+            {{#each contactMessages}}
+                <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 flex flex-col gap-3">
+
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-bold text-gray-900 dark:text-white text-lg">
+                                {{name}}
+                            </h3>
+                            <a href="mailto:{{email}}"
+                               class="text-sm text-emerald-600 dark:text-emerald-400 hover:underline">
+                                {{email}}
+                            </a>
+                        </div>
+                        <span class="text-xs text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">
+                            {{formatDate created_at}}
+                        </span>
+                    </div>
+
+                    <div class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-3 mt-1">
+                        {{message}}
+                    </div>
+
+                </div>
+            {{/each}}
+        </div>
+
+        <div class="hidden md:block overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+            <table class="min-w-full text-sm text-left">
+
+                <thead class="bg-gray-50 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider font-semibold">
+                <tr>
+                    <th class="px-6 py-4 w-1/6">Név</th>
+                    <th class="px-6 py-4 w-1/6">Email</th>
+                    <th class="px-6 py-4 w-1/2">Üzenet</th>
+                    <th class="px-6 py-4 w-1/6 text-right">Érkezett</th>
+                </tr>
+                </thead>
+
+                <tbody class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+
+                {{#each contactMessages}}
+                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition duration-150 ease-in-out">
+
+                        <td class="px-6 py-4 align-top">
+                            {{name}}
+                        </td>
+
+                        <td>
+                            <a href="mailto:{{email}}"
+                               class="text-emerald-600 dark:text-emerald-400 hover:underline block mt-1">
+                                {{email}}
+                            </a>
+                        </td>
+
+                        <td class="px-6 py-4 align-top">
+                            <p class="whitespace-pre-wrap leading-relaxed text-gray-600 dark:text-gray-300">{{message}}</p>
+                        </td>
+
+                        <td class="px-6 py-4 align-top text-right text-gray-500 dark:text-gray-400 whitespace-nowrap">
+                            {{formatDate created_at}}
+                        </td>
+                    </tr>
+                {{/each}}
+
+                </tbody>
+
+            </table>
+        </div>
+
+        {{#unless contactMessages}}
+            <div class="text-center py-12">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-400 mb-4">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                    </svg>
+                </div>
+                <p class="text-gray-500 dark:text-gray-400">Jelenleg nincs üzenet az adatbázisban.</p>
+            </div>
+        {{/unless}}
+
+    </div>
+</div>

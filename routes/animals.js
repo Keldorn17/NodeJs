@@ -9,6 +9,7 @@ router.get("/", async (req, res) => {
         res.render("animals", {
             title: "Adatbázis",
             user: req.session.user,
+            activePage: "animals",
             animals
         });
     } catch (err) {

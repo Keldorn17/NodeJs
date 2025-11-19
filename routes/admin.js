@@ -7,7 +7,8 @@ router.get("/", async (req, res) => {
     res.render("categories", {
         title: "CRUD – Kategóriák",
         categories,
-        user: req.session.user
+        user: req.session.user,
+        activePage: "admin"
     });
 });
 
@@ -17,7 +18,8 @@ router.get("/create", (req, res) => {
         buttonText: "Létrehozás",
         action: "/admin/create",
         category: {},
-        user: req.session.user
+        user: req.session.user,
+        activePage: "admin"
     });
 });
 
@@ -32,7 +34,8 @@ router.post("/create", async (req, res) => {
             action: "/crud/admin/create",
             category: { nev: req.body.nev },
             error: err.message,
-            user: req.session.user
+            user: req.session.user,
+            activePage: "admin"
         });
     }
 });
@@ -45,7 +48,8 @@ router.get("/edit/:id", async (req, res) => {
         buttonText: "Mentés",
         action: `/admin/edit/${req.params.id}`,
         category,
-        user: req.session.user
+        user: req.session.user,
+        activePage: "admin"
     });
 });
 
@@ -61,7 +65,8 @@ router.post("/edit/:id", async (req, res) => {
             action: `/admin/edit/${req.params.id}`,
             category: { id: req.params.id, nev: req.body.nev },
             error: err.message,
-            user: req.session.user
+            user: req.session.user,
+            activePage: "admin"
         });
     }
 });

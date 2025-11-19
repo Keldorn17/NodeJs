@@ -1,14 +1,52 @@
-<div class="container mx-auto px-6 py-10 flex justify-center">
-    <div class="w-full max-w-5xl
-                rounded-xl p-6
-                transition-colors duration-300">
+<div class="container mx-auto px-4 md:px-6 py-10 flex justify-center">
+    <div class="w-full max-w-5xl transition-colors duration-300">
 
-        <h2 class="text-2xl font-bold mb-6 text-left text-gray-900 dark:text-white">
+        <h2 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
             Védett Fajok Adatbázisa
         </h2>
 
-        <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+        <div class="grid grid-cols-1 gap-4 md:hidden">
+            {{#each animals}}
+                <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 flex flex-col gap-4">
 
+                    <div class="flex justify-between items-start gap-4">
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white leading-tight">
+                            {{allat_nev}}
+                        </h3>
+                        <span class="shrink-0 bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 py-1 px-2.5 rounded-full text-xs font-medium">
+                            {{kategoria}}
+                        </span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 border-t border-gray-100 dark:border-gray-700 pt-4">
+
+                        <div>
+                            <div class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">
+                                Eszmei érték
+                            </div>
+                            <div class="font-mono font-semibold text-gray-900 dark:text-white">
+                                {{ertek}} Ft
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-1">
+                                Felfedezés éve
+                            </div>
+                            <div class="font-semibold text-gray-900 dark:text-white">
+                                {{felfedezes_ev}}
+                                {{#unless felfedezes_ev}}
+                                    Nem ismert
+                                {{/unless}}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+
+        <div class="hidden md:block overflow-hidden rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
             <table class="min-w-full text-sm text-left">
 
                 <thead class="bg-gray-50 dark:bg-gray-700/50 text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider font-semibold">
@@ -24,26 +62,37 @@
 
                 {{#each animals}}
                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition duration-150 ease-in-out">
-                        <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{allat_nev}}</td>
+                        <td class="px-6 py-4 font-bold text-gray-900 dark:text-white">
+                            {{allat_nev}}
+                        </td>
                         <td class="px-6 py-4">
-                            <span class="bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 py-1 px-2 rounded-full text-xs">
+                            <span class="bg-emerald-100 dark:bg-emerald-900 text-emerald-800 dark:text-emerald-200 py-1 px-2 rounded-full text-xs font-medium">
                                 {{kategoria}}
                             </span>
                         </td>
-                        <td class="px-6 py-4 font-mono">{{ertek}} Ft</td>
-                        <td class="px-6 py-4">{{felfedezes_ev}}</td>
+                        <td class="px-6 py-4 font-mono font-medium text-gray-900 dark:text-white">
+                            {{ertek}} Ft
+                        </td>
+                        <td class="px-6 py-4">
+                            {{felfedezes_ev}}
+                            {{#unless felfedezes_ev}}
+                                Nem ismert
+                            {{/unless}}
+                        </td>
                     </tr>
                 {{/each}}
 
                 </tbody>
 
             </table>
-
         </div>
 
         {{#unless animals}}
-            <div class="text-center py-8 text-gray-500 dark:text-gray-400">
-                Jelenleg nincs adat az adatbázisban.
+            <div class="text-center py-12 border border-dashed border-gray-300 dark:border-gray-700 rounded-xl mt-4">
+                <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-400 mb-3">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                </div>
+                <p class="text-gray-500 dark:text-gray-400">Jelenleg nincs adat az adatbázisban.</p>
             </div>
         {{/unless}}
 
