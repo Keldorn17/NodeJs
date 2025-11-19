@@ -63,12 +63,16 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use("/", indexRouter);
-app.use("/auth", authRoutes);
-app.use("/contact", contactRouter);
-app.use("/animals", requireAuth, animalsRoutes);
-app.use("/admin", requireAdmin, adminRoutes);
-app.use("/contact-list", requireAdmin, contactListRouter);
+const basePath = process.env.BASE_PATH ?? "";
+
+app.use(basePath + "/", indexRouter);
+app.use(basePath + "/auth", authRoutes);
+app.use(basePath + "/contact", contactRouter);
+app.use(basePath + "/animals", requireAuth, animalsRoutes);
+app.use(basePath + "/admin", requireAdmin, adminRoutes);
+app.use(basePath + "/contact-list", requireAdmin, contactListRouter);
+
+app.locals.basePath = basePath;
 
 (async () => {
     await ensureAdminExists();

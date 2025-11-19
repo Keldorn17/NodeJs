@@ -19,9 +19,10 @@ router.post("/register", async (req, res) => {
             });
         }
 
+        const basePath = req.app.locals.basePath;
         req.session.user = user;
         req.session.isLoggedIn = true;
-        res.redirect("/");
+        res.redirect(basePath + "/");
     } catch (err) {
         console.error("Registration error:", err);
         res.render("register", {
@@ -45,13 +46,15 @@ router.post("/login", async (req, res) => {
     }
 
     req.session.user = { id: user.id, username: user.username, role: user.role };
-    res.redirect("/");
+    const basePath = req.app.locals.basePath;
+    res.redirect(basePath + "/");
 });
 
 router.get("/logout", (req, res) => {
+    const basePath = req.app.locals.basePath;
     req.session.destroy(() => {
         res.clearCookie("connect.sid");
-        res.redirect("/auth/login?logout=true");
+        res.redirect(basePath + "/auth/login?logout=true");
     });
 });
 
